@@ -15,6 +15,11 @@ export class QuestionService{
   ){}
 
 
+  async findQuestionById(id: number): Promise<Question>{
+    return await this.questionRepostiry.findOne({where: {id}, relations: ['quiz', 'options']})
+  }
+
+
   async createQuestion(question: CreateQuestionDto, quiz: Quiz): Promise<Question> { 
     const newQuestion = await this.questionRepostiry.save({question: question.question});
 
